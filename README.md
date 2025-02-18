@@ -1,6 +1,5 @@
 # Development Assistant
 
-[Image of Development Assistant 项目Logo，如果项目有Logo的话]
 
 ## 项目介绍 (Project Introduction)
 
