@@ -1,0 +1,175 @@
+import time
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, Integer, text, SQLAl
+from app.main import app
+from sqlalchemy.dialects import mysql
+from sqlalchemy import desc, asc
+from common.log import logger
+
+
+# Base = declarative_base()
+
+db = SQLAlchemy(app=app, session_options={'autocommit': True})
+
+
+
+class ModelBase(db.Model):
+    __databasename__ = ''
+    __tablename__ = ''
+    __abstract__ = True
+    __bind_key__ = 'chatbot'
+
+    __search_fields__ = []
+    __fuzzy_fields__ = {}
+    __range_fields__ = []
+
+    # id = Column(Integer, primary_key=True)
+    add_time = Column(Integer, default=time.time)
+    update_time = Column(Integer, default=time.time,
+                         onupdate=time.time)
+
+    def insert(self, data):
+        if isinstance(data, list):
+            self.query.session.add_all(data)
+        else:
+            self.query.session.add(data)
+
+        self.query.session.flush()
+
+    def get_filters(self, **kwargs):
+        items = []
+        for key, value in kwargs.items():
+            if key in self.__search_fields__:
+                if self.__fuzzy_fields__.get(key) is not None:
+                    items.append(getattr(type(self), self.__fuzzy_fields__[
+                                 key]).like('%{}%'.format(value)))
+                elif type(value) == list:
+                    items.append(getattr(type(self), key).in_(value))
+                elif type(value) == dict:
+                    if value.get('gt') is not None:
+                        items.append(getattr(type(self), key)
+                                     > value.get('gt'))
+                    elif value.get('gte') is not None:
+                        items.append(getattr(type(self), key)
+                                     >= value.get('gte'))
+                    elif value.get('lt') is not None:
+                        items.append(getattr(type(self), key)
+                                     < value.get('lt'))
+                    elif value.get('lte') is not None:
+                        items.append(getattr(type(self), key)
+                                     <= value.get('lte'))
+                    elif value.get('neq', ''):
+                        items.append(getattr(type(self), key) != value.get('neq'))
+                    elif value.get('isnot') is not None:
+                        items.append(getattr(type(self), key).isnot_(value.get('isnot')))
+                    elif value.get('notin') is not None:
+                        items.append(getattr(type(self), key).notin_(value.get('notin')))
+                    else:
+                        items.append(getattr(type(self), key) == value)
+                else:
+                    items.append(getattr(type(self), key) == value)
+        # logger.debug(items)
+        return self.query.filter(*items)
+
+    def search(self, **kwargs):
+        if kwargs is None:
+            return []
+        _query = self.get_filters(**kwargs)
+        # logger.info(items)
+        # _query = self.query.filter(*items)
+        # total = _query.count()
+        # logger.info(_query.statement.compile(dialect=mysql.dialect(), compile_kwargs={"literal_binds": True}))
+
+        # if total == 0:
+        #     return {'total': 0, 'data': []}
+
+        sort_func = kwargs.get('sort[order]', 'desc')
+        orderby = kwargs.get('sort[prop]')
+        if orderby is not None:
+            _query = _query.order_by(eval(sort_func)(orderby))
+
+        page = kwargs.get('page', 1)
+        page_size = kwargs.get('page_size', 20)
+        _query = _query.offset(page_size * (page - 1)) \
+            .limit(page_size)
+
+        logger.debug(_query.statement.compile(dialect = mysql.dialect(), compile_kwargs = {"literal_binds": True}))
+        result = self.to_json(_query.all())
+        logger.debug(result)
+        return result
+        # return {'total': total, 'data': result}
+
+    def search_count(self, **kwargs) -> int:
+        if kwargs is None:
+            return 0
+        cursor = self.get_filters(**kwargs)
+        logger.debug(cursor.statement.compile(dialect = mysql.dialect(), compile_kwargs = {"literal_binds": True}))
+
+        # cursor = self.query.filter(*items)
+        return cursor.count()
+
+    def get_by_id(self, id):
+        info =  self.query.get(id)
+        return info.to_dict() if (info is not None) else {}
+
+    def get_one(self, **kwargs):
+        _query = self.get_filters(**kwargs)
+        return _query.one().to_dict() if _query.count() else {}
+        return self.get_filters(**kwargs).one()
+
+    def update(self, where: dict, updateData: dict) -> bool:
+        if len(updateData) == 0:
+            return False
+
+        cursor = self.get_filters(**where)
+        if cursor.count() == 0:
+            return False
+
+        return cursor.update(updateData)
+
+    def delete(self, **kwargs):
+        return self.get_filters(**kwargs).delete()
+
+    def begin(self, subtransactions=False, nested=False, _subtrans=False):
+        return self.query.session.begin(subtransactions, nested, _subtrans)
+
+    def commit(self):
+        return self.query.session.commit()
+
+    def rollback(self):
+        return self.query.session.rollback()
+
+    def lock(self, **kwargs):
+        return self.get_filters(**kwargs).with_for_update()
+
+    def execute(self, sql: str, params: dict = {}):
+        cursor = self.query.from_statement(text(sql))
+        if params:
+            cursor = cursor.params(**params)
+
+        res = cursor.all()
+        logger.info(cursor.statement.compile(dialect=mysql.dialect()))
+
+        return res
+
+    def from_dict(self, dict):
+        for key in self.__mapper__.c.keys():
+            # logger.info(key, dict.get(key, None))
+            if dict.get(key, None) is not None:
+                # logger.info(key, dict.get(key))
+                self.__dict__[key] = dict.get(key)
+
+    def to_dict(self):
+        data = {}
+        for key in self.__mapper__.c.keys():
+            if getattr(self, key, None) is not None:
+                data[key] = getattr(self, key)
+        return data
+
+    def to_json(self, result):
+        if type(result) == list:
+            return [v.to_dict() for v in result]
+        else:
+            if result:
+                return result.to_dict()
+        return result

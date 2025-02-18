@@ -1,0 +1,31 @@
+---
+# docker-compose -f weaviate-docker-compose.yml up -d
+services:
+  weaviate:
+    command:
+      - --host
+      - 0.0.0.0
+      - --port
+      - '8080'
+      - --scheme
+      - http
+    image: cr.weaviate.io/semitechnologies/weaviate:1.28.4
+    ports:
+      - 8080:8080
+      - 50051:50051
+    volumes:
+      - ./data/weaviate:/var/lib/weaviate # 将主机上的 ./data/weaviate 目录挂载到容器的 /var/lib/weaviate 目录
+    restart: on-failure:0
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
+      PERSISTENCE_DATA_PATH: '/var/lib/weaviate'
+      ENABLE_API_BASED_MODULES: 'true'
+      ENABLE_MODULES: 'text2vec-ollama,generative-ollama'
+      CLUSTER_HOSTNAME: 'node1'
+      # AUTHENTICATION_APIKEY_ENABLED: 'true'
+      # AUTHENTICATION_APIKEY_ALLOWED_KEYS: 'test-secret-key,test2-secret-key'
+      # AUTHENTICATION_APIKEY_USERS: 'test@2024.com,test2@2024.com'
+      # AUTHORIZATION_ADMINLIST_ENABLED: 'true'
+      # AUTHORIZATION_ADMINLIST_USERS: 'test@2024.com'
+      # AUTHORIZATION_ADMINLIST_READONLY_USERS: 'test2@2024.com'

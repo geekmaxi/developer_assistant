@@ -1,0 +1,150 @@
+[
+    {
+        "framework": "python",
+        "version": "3.13",
+        "base_url": "https://docs.python.org/zh-cn/3.13/",
+        "only_current_dir": true,
+        "exclude": [
+            "search.html",
+            "bugs.html",
+            "license.html",
+            "copyright.html",
+            "download.html",
+            "about.html",
+            "py-modindex.html",
+            "genindex.html",
+            "/_static/"
+        ],
+        "ingester": "python"
+    },
+    {
+        "framework": "fastapi",
+        "version": "0.115.8",
+        "base_url": "https://fastapi.tiangolo.com/zh/",
+        "only_current_dir": true,
+        "exclude": [
+            "/resources/",
+            "/help-fastapi/",
+            "/contributing/",
+            "/external-links/",
+            "/management-tasks/",
+            "/release-notes/",
+            "/about/",
+            "/alternatives/",
+            "/history-design-future/",
+            "/benchmarks/",
+            "/management/",
+            "/fastapi-people/"
+        ],
+        "ingester": "fastapi"
+    },
+    {
+        "framework": "html",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/html/",
+        "only_current_dir": true,
+        "ingester": "w3school",
+        "exclude": [
+            "https://www.w3ccoo.com/html/tryit.asp",
+            "https://www.w3ccoo.com/html/exercise.asp"
+        ]
+    },
+    {
+        "framework": "css",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/css/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "js",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/js/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "java",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/java/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "c",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/c/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "c++",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/cpp/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "c#",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/cs/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "sql",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/sql/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "php",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/php/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "mysql",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/mysql/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "pycharm",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/pycharm/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "vue",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/vue/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "react",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/react/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "ai",
+        "version": "",
+        "base_url": "https://www.w3ccoo.com/ai/",
+        "only_current_dir": true,
+        "ingester": "w3school"
+    },
+    {
+        "framework": "langchain",
+        "version": "",
+        "base_url": "https://platform.openai.com/sitemap.xml",
+        "only_current_dir": true,
+        "ingester": "langchain"
+    }
+]
