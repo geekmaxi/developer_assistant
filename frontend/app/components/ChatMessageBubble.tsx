@@ -353,7 +353,7 @@ export function ChatMessageBubble(props: {
               👎
             </Button>
             <Spacer />
-            <Button
+            {/* <Button
               size="sm"
               variant="outline"
               colorScheme={runId === null ? "blue" : "gray"}
@@ -366,7 +366,7 @@ export function ChatMessageBubble(props: {
               color="white"
             >
               🦜🛠️ View trace
-            </Button>
+            </Button> */}
           </HStack>
         )}
 

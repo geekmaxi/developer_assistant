@@ -59,8 +59,8 @@
 
 ## 问答流程 (Question-Answering Process)
 
-<!-- ![Image of 问答流程图](./assests/RAG问答数据流.png) -->
-<img src="./assests/RAG问答数据流.png" width=50% />
+![Image of 问答流程图](./assests/RAG问答数据流.png)
+<!-- <img src="./assests/RAG问答数据流.png" width=50% /> -->
 
 
 1.  **用户提问 (User Quesiton)**: 用户通过前端界面输入技术问题。
@@ -119,6 +119,12 @@
     ```bash
     conda create -n da_venv python=3.11  # 或指定其他 Python 版本
     conda activate da_venv
+    ```
+
+3. **安装poetry (Install poetry)**
+
+    ```bash
+    curl -sSL https://install.python-poetry.org | python3
     ```
 
 3.  **安装后端依赖 (Install Backend Dependencies)**
