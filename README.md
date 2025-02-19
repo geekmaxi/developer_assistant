@@ -220,7 +220,7 @@
 
 ## 许可证 (License)
 
-Apache License @ 2024 GeeMaxi
+Apache License @ 2025 GeeMaxi
 
 本项目采用 Apache License 开源许可证。
 
