@@ -22,9 +22,9 @@ import typing
 class SiliconFlowEmbeddings(Embeddings):
     def __init__(
         self, 
-        api_key: str, 
         model: str = "bge-large-zh-v1.5",
-        base_url: str = "https://api.siliconflow.cn/v1/"
+        api_key: str = "",
+        base_url: str = os.getenv("SILICONFLOW_BASE_URL")
     ):
         self.api_key = api_key
         self.model = str(model)
@@ -57,7 +57,7 @@ class SiliconFlowEmbeddings(Embeddings):
         return self._embed(texts)
 
     def embed_query(self, text: str) -> typing.List[float]:
-        return self._embed([text])
+        return self._embed([text])[0]
 
 
 
@@ -89,6 +89,8 @@ class Siliconflow(LLMInterface):
                 model_name=model_name,
                 openai_api_base=os.getenv("SILICONFLOW_BASE_URL"),
                 openai_api_key=os.getenv("SILICONFLOW_API_KEY"),
+                temperature=0,
+                max_tokens=8000
             )
         else:
             raise LLMException(f"Unsupported model usage: {usage}")

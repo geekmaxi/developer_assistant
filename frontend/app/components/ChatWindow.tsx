@@ -305,7 +305,7 @@ export function ChatWindow(props: { conversationId: string }) {
               >
                 <option value="openai_gpt_3_5_turbo">GPT-3.5-Turbo</option>
                 <option value="deepseek_v3">DeepSeek V3</option>
-                <option value="llama2_chinese">LLAMA2 Chineses</option>
+                <option value="llama3">LLAMA3</option>
                 <option value="qwen_max">通义千问-Max</option>
               </Select>
             )}
@@ -350,7 +350,7 @@ export function ChatWindow(props: { conversationId: string }) {
           marginRight={"56px"}
           placeholder="问一问"
           textColor={"white"}
-          borderColor={"rgb(58, 58, 61)"}
+          borderColor={"rgb(169, 169, 248)"}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {

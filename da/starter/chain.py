@@ -168,12 +168,6 @@ def serialize_history(request: ChatRequest, config, **kwargs):
             converted_chat_history.append(AIMessage(content=message["ai"]))
     return converted_chat_history
 
-def get_session_history(config):
-    return SQLChatMessageHistory(
-        session_id=session_id,
-        connection_string="sqlite:///chat_history.db"
-    )
-
 def create_chain(llm: LanguageModelLike) -> Runnable:
     retriever_chain = create_retriever_chain(
         llm
@@ -211,7 +205,7 @@ def create_chain(llm: LanguageModelLike) -> Runnable:
             ConfigurableField("llm"),
             default_key="deepseek_v3",
             # deepseek_v3=deepseek_v3,
-            llama2_chinese=default_response_synthesizer,
+            llama3=default_response_synthesizer,
             qwen_max=default_response_synthesizer,
             openai_gpt_3_5_turbo=default_response_synthesizer,
         )
@@ -237,14 +231,15 @@ def create_chain(llm: LanguageModelLike) -> Runnable:
     # )
 
 #   "deepseek_v3",
-#   "llama2_chinese",
+#   "llama3",
 #   "openai_gpt_3_5_turbo",
 #   "qwen_max"
 
 from da.llm import Openai, DeepSeek, Ollama, Bailian, Usage, ModelNamed
 gpt_3_5 = Openai.select(ModelNamed.GPT_35, Usage.GENERATION)
 deepseek_v3 = Bailian.select(ModelNamed.DEEPSEEK_V3, Usage.CHAT)
-llama2_chinese = Ollama.select(ModelNamed.LLAMA2_CHINESE, Usage.CHAT)
+# llama2_chinese = Ollama.select(ModelNamed.LLAMA2_CHINESE, Usage.CHAT)
+llama3 = Bailian.select(ModelNamed.LLAMA3, Usage.CHAT)
 qwen_max = Bailian.select(ModelNamed.QWEN_MAX, Usage.CHAT)
 
 # gpt_3_5 = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0, streaming=True)
@@ -278,11 +273,11 @@ llm = deepseek_v3.configurable_alternatives(
     ConfigurableField(id="llm"),
     default_key="deepseek_v3",
     # deepseek_v3=deepseek_v3,
-    llama2_chinese=llama2_chinese,
+    llama3=llama3,
     qwen_max=qwen_max,
     openai_gpt_3_5_turbo=gpt_3_5,
 ).with_fallbacks(
-    [deepseek_v3, gpt_3_5, qwen_max, llama2_chinese]
+    [deepseek_v3, gpt_3_5, qwen_max, llama3]
 )
 
 # retriever = get_retriever()

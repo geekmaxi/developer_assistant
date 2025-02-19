@@ -19,7 +19,7 @@ class DeepSeek(LLMInterface):
                 api_key=os.getenv("DEEPSEEK_API_KEY"),
                 model=model_name.value,
                 temperature=0, # 设置成0最稳定；structured generation中稳定最重要
-                max_tokens=2000,
+                max_tokens=8000,
             )
         elif usage == Usage.GENERATION:
             return OpenAI(
@@ -27,7 +27,7 @@ class DeepSeek(LLMInterface):
                 api_key=os.getenv("DEEPSEEK_API_KEY"),
                 model=model_name.value,
                 temperature=0, # 设置成0最稳定；structured generation中稳定最重要
-                max_tokens=2000,
+                max_tokens=8000,
             )
         else:
             raise LLMException(f"Unsupported model usage: {usage}")

@@ -16,7 +16,8 @@ class ModelNamed(Enum):
     DEEPSEEK_V3 = "deepseek-v3"
     DEEPSEEK_R1 = "deepseek-r1"
     LLAMA2_CHINESE = "llama2-chinese"
-    LLAMA3_CHINESE = "llamafamily/llama3-chinese-8b-instruct"
+    LLAMA3 = "llama3.3-70b-instruct"
+    # LLAMA3_CHINESE_8B = "llamafamily/llama3-chinese-8b-instruct"
 
     QWEN_MAX = "qwen-max-latest"
 

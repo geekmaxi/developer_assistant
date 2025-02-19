@@ -7,7 +7,7 @@ from langchain_weaviate import WeaviateVectorStore
 from langchain.indexes import SQLRecordManager
 from langchain.indexes import index, IndexingResult
 from langchain_core.documents import Document
-from da.llm import SiliconFlowEmbeddings, ModelNamed
+from da.llm import SiliconFlowEmbeddings, ModelNamed, Siliconflow, Usage, Ollama
 
 from .weaviate_collection_config import weaviate_collection_config
 
@@ -26,18 +26,20 @@ class DAVectorStore(object):
         """初始化向量数据库、向量模型"""
 
         """初始化Embeddings模型"""
-        self._embeddings = OllamaEmbeddings(
-            # model="nomic-embed-text",
-            model="bge-m3",
-            base_url="http://127.0.0.1:11434",
-            # model_kwargs={
-            #     "device": "cpu"
-            # },
-            # encode_kwargs = {
-            #     "normallize_embeddings": True,
-            #     "query_instruction": ""
-            # }
-        )
+        self._embeddings = Siliconflow.select(ModelNamed.BGE_M3, Usage.EMBEDDING)
+        # self._embeddings = OllamaEmbeddings(
+        #     # model="nomic-embed-text",
+        #     model="bge-m3",
+        #     base_url="http://127.0.0.1:11434",
+        #     # model_kwargs={
+        #     #     "device": "cpu"
+        #     # },
+        #     # encode_kwargs = {
+        #     #     "normallize_embeddings": True,
+        #     #     "query_instruction": ""
+        #     # }
+        # )
+        # self._embeddings = Siliconflow.select(ModelNamed.BGE_M3, Usage.EMBEDDING)
         # self._embeddings = SiliconFlowEmbeddings(
         #     model=ModelNamed.BGE_M3,
         #     api_key=os.environ["SILICONFLOW_API_KEY"],
