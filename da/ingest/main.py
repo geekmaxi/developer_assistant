@@ -4,6 +4,9 @@
 import datetime
 import os
 import simplejson
+import dotenv
+dotenv.load_dotenv(os.path.join(os.environ.get("PYTHONPATH"), ".env"))
+
 from da.ingest.config import load_config, Config
 from da.ingest.python import PythonIngester
 from da.ingest.fastapi import FastapiIngester
@@ -45,8 +48,7 @@ def unlock(f, lock_info):
     f.close()
 
 if __name__ == "__main__":
-    import dotenv
-    dotenv.load_dotenv('.env')
+
 
     configs = load_config()
 

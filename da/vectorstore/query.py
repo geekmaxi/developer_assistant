@@ -1,8 +1,10 @@
+import os
 from da.vectorstore import DAVectorStore
 
 if __name__ == "__main__":
     import dotenv
-    dotenv.load_dotenv('.env')
+    dotenv.load_dotenv(os.path.join(os.environ.get("PYTHONPATH"), ".env"))
+
     vs = DAVectorStore()
     client = vs.vectorstore_client
     if not(client.is_connected()):

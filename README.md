@@ -1,11 +1,26 @@
-# Development Assistant
+# Developer Assistant
+
+![logo](./assests/icon.png)
+
+大模型在生成文本时，有时会出现“一本正经地胡说八道”的现象，即捏造事实、编造信息或给出与事实不符的答案。这种现象被称为大模型的“幻觉”问题。
+大模型的“幻觉”问题会对开发者产生误导，尤其是在开发者寻求帮助时，如果大模型给出了错误的或虚假的信息，可能会导致开发者走弯路或做出错误的决策。
+系统通过加强知识库的整合，提高模型对事实信息的辨别能力，以及开发更有效的幻觉检测和抑制技术，我们可以有效地减少大模型“一本正经地胡说八道”的现象，提高其生成文本的质量和可靠性。
+
+## RAG介绍 (RAG Introduction)
+
+RAG（检索增强生成） 是一种将信息检索与大型语言模型（LLM）相结合的AI框架。它通过从外部知识库检索相关信息，并将其提供给LLM，从而提高LLM生成文本的准确性和信息量。简单来说，RAG就像给LLM配备了一个“外脑”，让它在回答问题或生成文本时，可以随时查阅外部资料，而不是仅仅依靠自己记忆中的知识。
+
+RAG的核心思想是“检索-增强-生成”。首先，它会根据用户的提问或输入，从外部知识库中检索相关信息；然后，将检索到的信息作为上下文提供给LLM；最后，LLM利用这些信息和自身强大的语言生成能力，生成高质量的文本回复或输出。RAG的优势在于可以提高LLM生成文本的准确性、增加信息量、并增强其适应性，因此被广泛应用于问答系统、聊天机器人、文本摘要、内容创作等领域。
 
 
 ## 项目介绍 (Project Introduction)
 
-**Development Assistant** 是一个开源的知识问答服务，旨在为开发者提供快速、准确的技术知识解答。项目深度聚焦于软件开发领域，构建了涵盖多种主流开发语言和技术的知识库，并利用先进的大语言模型技术，为开发者提供强大的技术支持。
+**Developer Assistant** 是一个开源的知识问答服务，旨在为开发者提供快速、准确的技术知识解答。项目深度聚焦于软件开发领域，构建了涵盖多种主流开发语言和技术的知识库，并利用先进的大语言模型技术，为开发者提供强大的技术支持。
 
 我们的目标是打造一个能够不断学习和成长的智能助手，帮助开发者更高效地解决技术难题，提升开发效率。
+
+**演示地址**: [http://assistant.geekmaxi.top/](http://assistant.geekmaxi.top/)
+
 
 ### 主要特性 (Key Features)
 
@@ -74,7 +89,7 @@
 
 ## 环境配置 (Environment Configuration)
 
-在开始使用 Development Assistant 之前，您需要配置好开发环境。
+在开始使用 Developer Assistant 之前，您需要配置好开发环境。
 
 ### 依赖环境 (Dependencies)
 
@@ -101,7 +116,7 @@
 
 ## 安装说明 (Installation Instructions)
 
-以下是在本地安装和运行 Development Assistant 的步骤：
+以下是在本地安装和运行 Developer Assistant 的步骤：
 
 1.  **克隆代码仓库 (Clone Repository)**
 
@@ -195,7 +210,7 @@
 
 [Image of 项目使用界面截图，例如用户提问框，答案展示区域、知识库浏览界面等]
 
-1.  **打开 Development Assistant 前端页面**。
+1.  **打开 Developer Assistant 前端页面**。
 2.  在提问框中输入您的技术问题，例如 "Python 装饰器如何使用？" 或 "Java HashMap 的底层原理是什么？"。
 3.  点击 "提问" 或类似按钮提交问题。
 4.  系统会在答案展示区域显示模型生成的答案。
@@ -203,7 +218,7 @@
 
 ## 贡献指南 (Contributing)
 
-欢迎您为 Development Assistant 项目贡献力量！您可以通过以下方式参与贡献：
+欢迎您为 Developer Assistant 项目贡献力量！您可以通过以下方式参与贡献：
 
 *   **提交 Issue**:  如果您发现 Bug 或者有功能建议，请在 [GitHub Issue 页面](https://github.com/geekmaxi/development_assistant/issues) 提交 Issue。
 *   **提交 Pull Request (PR)**:  如果您希望贡献代码，修复 Bug 或者增加新功能，请 Fork 本项目，创建您的分支，提交 Pull Request。
@@ -217,6 +232,13 @@
 *   **参与社区讨论**:  欢迎加入我们的社区，参与讨论，分享您的想法和建议。  您可以通过 [GitHub Discussions 页面](https://github.com/geekmaxi/development_assistant/discussions) 参与讨论。
 
 *   **完善知识库**:  项目知识库的建设非常重要，欢迎您贡献新的知识条目，或者改进现有的知识条目，提升知识库的质量和覆盖范围。
+
+## 规划
+
+1. RAGAS评估
+2. 对话管理
+1. token消费统计
+3. ...
 
 ## 许可证 (License)
 
@@ -233,10 +255,10 @@ Apache License @ 2025 GeeMaxi
 *   [s.showling@gmail.com]
 *   [GitHub Discussions 页面链接: https://github.com/geekmaxi/development_assistant/discussions ]
 
-感谢您使用 Development Assistant!  期待您的参与和反馈！
+感谢您使用 Developer Assistant!  期待您的参与和反馈！
 
 ---
-**[项目名称: Development Assistant]**  
+**[项目名称: Developer Assistant]**  
 
 **[版本号:  v1.0.0]** 
  

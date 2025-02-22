@@ -8,7 +8,7 @@ from .interface import LLMInterface
 class Ollama(LLMInterface):
     @staticmethod
     def select(model_name: ModelNamed = "", usage: Usage = Usage.CHAT) -> BaseLanguageModel:
-        assert model_name in [ModelNamed.LLAMA2_CHINESE, ModelNamed.BGE_M3], f"Unsupported model: {model_name}"
+        assert model_name in [ModelNamed.LLAMA2_CHINESE, ModelNamed.LLAMA3, ModelNamed.BGE_M3], f"Unsupported model: {model_name}"
         assert usage in [Usage.CHAT, Usage.GENERATION, Usage.EMBEDDING], f"Unsupported model usage: {usage}"
         
         if usage == Usage.CHAT:

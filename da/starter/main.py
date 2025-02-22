@@ -2,7 +2,7 @@
 import asyncio
 import os
 import dotenv
-dotenv.load_dotenv(os.path.join(os.environ.get("PYTHONPATH", ".env")))
+dotenv.load_dotenv(os.path.join(os.environ.get("PYTHONPATH"), ".env"))
 
 from typing import Any, Dict, Optional, Union
 from uuid import UUID

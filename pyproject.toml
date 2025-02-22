@@ -1,7 +1,7 @@
 [project]
 name = "development-assistant"
 version = "0.1.0"
-description = "Development Assistant"
+description = "Developer Assistant"
 authors = [
     {name = "geekmaxi",email = "s.showling@gmail.com"}
 ]
